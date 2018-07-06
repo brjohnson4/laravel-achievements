@@ -26,7 +26,7 @@ trait EntityRelationsAchievements
             $this->syncAchievements();
         }
         return $this->morphMany(AchievementProgress::class, 'achiever')
-            ->orderBy('updated_at', 'desc');
+            ->orderBy('unlocked_at', 'desc');
     }
 
     /**
@@ -60,7 +60,7 @@ trait EntityRelationsAchievements
      */
     public function inProgressAchievements()
     {
-        return $this->achievements()->whereNull('unlocked_at')->where('points', '>', 0)->get();
+        return $this->achievements()->whereNull('unlocked_at')->where('points', '>', 0)->with('details')->get();
     }
 
     /**
@@ -70,7 +70,7 @@ trait EntityRelationsAchievements
      */
     public function unlockedAchievements()
     {
-        return $this->achievements()->whereNotNull('unlocked_at')->get();
+        return $this->achievements()->whereNotNull('unlocked_at')->with('details')->get();
     }
 
     /**
