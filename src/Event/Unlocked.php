@@ -11,7 +11,7 @@ use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class Unlocked implements ShouldBroadcast
+class Unlocked 
 {
     use SerializesModels;
 
@@ -27,14 +27,14 @@ class Unlocked implements ShouldBroadcast
         $this->progress = $progress;
     }
 
-    public function broadcastAs()
-    {
-        return 'progress-unlock';
-    }
+    // public function broadcastAs()
+    // {
+    //     return 'progress-unlock';
+    // }
 
-    public function broadcastOn()
-    {
-        return new PrivateChannel('badge-earned.' . $this->progress->achiever_id);        
-    }
+    // public function broadcastOn()
+    // {
+    //     return new PrivateChannel('badge-earned.' . $this->progress->achiever_id);        
+    // }
     
 }
